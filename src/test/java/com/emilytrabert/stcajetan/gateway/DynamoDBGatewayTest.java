@@ -26,7 +26,7 @@ public class DynamoDBGatewayTest {
     @Before
     public void setup() {
         mapper = mock(DynamoDBMapper.class);
-        classUnderTest = new DynamoDBGateway();
+        classUnderTest = new DynamoDBGateway(mapper);
         testJob = new Job();
         testJob.setId(TEST_ID);
         testJob.setJobStatus(TEST_STATUS);
