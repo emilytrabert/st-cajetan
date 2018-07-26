@@ -4,14 +4,15 @@
   <artifactId>st-cajetan</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <properties>
+    <maven.compiler.source>10</maven.compiler.source>
+    <maven.compiler.target>10</maven.compiler.target>
+  </properties>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
-        <configuration>
-          <release>9</release>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
@@ -45,22 +46,11 @@
              <goals>
                <goal>report</goal>
              </goals>
-             <configuration>
-               <excludes>
-                 <exclude>*lombok*</exclude>
-               </excludes>
-             </configuration>
            </execution>
          </executions>
        </plugin>
     </plugins>
   </build>
-  <repositories>
-    <repository>
-      <id>local-maven-repo</id>
-      <url>file:///${project.basedir}/local-maven-repo</url>
-    </repository>
-  </repositories>
   <dependencyManagement>
     <dependencies>
       <dependency>
