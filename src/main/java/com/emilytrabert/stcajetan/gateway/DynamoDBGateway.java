@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
@@ -16,12 +15,14 @@ import com.emilytrabert.stcajetan.JobStatus;
 
 public class DynamoDBGateway {
 
-    private final AmazonDynamoDB client;
     private final DynamoDBMapper mapper;
 
     public DynamoDBGateway() {
-        this.client = AmazonDynamoDBClientBuilder.standard().build();
-        this.mapper = new DynamoDBMapper(client);
+        this.mapper = new DynamoDBMapper(AmazonDynamoDBClientBuilder.standard().build());
+    }
+
+    DynamoDBGateway(DynamoDBMapper mapper) {
+        this.mapper = mapper;
     }
 
     public Optional<Job> getById(String id) {
