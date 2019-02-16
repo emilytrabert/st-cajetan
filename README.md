@@ -18,5 +18,6 @@ Tomcat job hunt documentation storage service.
 
 ## Run
 
-`mvn tomcat7:run`
+1. `mvn tomcat7:run`
+2. Jobs page will be available at http://localhost:8080/jobs.
 
