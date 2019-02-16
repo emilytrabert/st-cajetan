@@ -8,6 +8,13 @@ Tomcat job hunt documentation storage service.
 ## Prereqs
 
 * [Maven](https://maven.apache.org/download.cgi)
+* [AWS Account](https://aws.amazon.com)
+
+## Setup
+
+1. Create a DynamoDB table named `job-apps`.
+2. Set your AWS access credentials. (This can be done [many ways](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)).
+3. In order to run the integration test, you will need an entry with `id` of `test` and `jobStatus` of `INTERVIEWING`.
 
 ## Run
 
