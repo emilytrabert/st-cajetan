@@ -12,13 +12,23 @@
         <tr>
             <th>Job Id</th>
             <th>Job Status</th>
+            <th>Listing URL</th>
+            <th>Notes</th>
         </tr>
         <c:forEach items="${jobs}" var="job">
             <tr>
                 <td>${job.id}</td>
                 <td>${job.jobStatus}</td>
+                <td><a href="${job.listingUrl}">Listing</a></td>
+                <td>${job.notes}</td>
             </tr>
         </c:forEach>
     </table>
+
+    <form action="/jobs" method="post">
+        Listing URL: <input type="text" name="listingUrl"><br>
+        Notes: <input type="text" name="notes"><br>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>

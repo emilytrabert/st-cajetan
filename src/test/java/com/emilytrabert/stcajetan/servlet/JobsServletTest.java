@@ -2,11 +2,15 @@ package com.emilytrabert.stcajetan.servlet;
 
 import static com.emilytrabert.stcajetan.servlet.JobsServlet.JOBS_ATTRIBUTE_NAME;
 import static com.emilytrabert.stcajetan.servlet.JobsServlet.JOBS_JSP_PATH;
+import static com.emilytrabert.stcajetan.servlet.JobsServlet.LISTING_URL_ATTRIBUTE_NAME;
+import static com.emilytrabert.stcajetan.servlet.JobsServlet.NOTES_ATTRIBUTE_NAME;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -53,4 +57,24 @@ public class JobsServletTest {
         verify(dispatcher).forward(request, response);
     }
 
+    @Test
+    public void testPost() throws ServletException, IOException {
+        when(gateway.getAll()).thenReturn(results);
+        when(request.getRequestDispatcher(JOBS_JSP_PATH)).thenReturn(dispatcher);
+        when(request.getParameterMap()).thenReturn(new HashMap<String, String[]>() {
+            {
+                put(LISTING_URL_ATTRIBUTE_NAME, new String[] { "google.com" });
+                put(NOTES_ATTRIBUTE_NAME, new String[] { "some notes" });
+            }
+        });
+
+        classUnderTest.doPost(request, response);
+
+        // Verify doPost actions
+        verify(gateway).save(any(Job.class));
+
+        // Verify doGet is called after
+        verify(request).setAttribute(JOBS_ATTRIBUTE_NAME, results);
+        verify(dispatcher).forward(request, response);
+    }
 }

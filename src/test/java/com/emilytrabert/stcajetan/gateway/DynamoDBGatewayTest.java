@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -59,5 +60,14 @@ public class DynamoDBGatewayTest {
         Job item = results.get(0);
         assertEquals("test", item.getId());
         assertEquals(JobStatus.INTERVIEWING, item.getJobStatus());
+    }
+
+    @Test
+    public void testSave() {
+        Job item = new Job();
+
+        classUnderTest.save(item);
+
+        verify(mapper).save(item);
     }
 }

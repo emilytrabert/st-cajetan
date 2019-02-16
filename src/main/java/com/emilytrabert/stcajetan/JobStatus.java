@@ -2,5 +2,5 @@ package com.emilytrabert.stcajetan;
 
 public enum JobStatus {
 
-    SUBMITTED, REJECTED, INTERVIEWING;
+    SAVED, SUBMITTED, REJECTED, INTERVIEWING;
 }

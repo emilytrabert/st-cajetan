@@ -30,11 +30,16 @@ public class DynamoDBGateway {
     }
 
     public List<Job> getAll() {
-        Map<String, AttributeValue> expressionMap = new HashMap<>();
-        expressionMap.put(":status", new AttributeValue().withS(JobStatus.INTERVIEWING.name()));
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression().withFilterExpression("jobStatus = :status")
-                .withExpressionAttributeValues(expressionMap);
+        //Map<String, AttributeValue> expressionMap = new HashMap<>();
+        //expressionMap.put(":status", new AttributeValue().withS(JobStatus.INTERVIEWING.name()));
+        //DynamoDBScanExpression scanExpression = new DynamoDBScanExpression().withFilterExpression("jobStatus = :status")
+        //        .withExpressionAttributeValues(expressionMap);
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
         PaginatedScanList<Job> results = mapper.scan(Job.class, scanExpression);
         return results;
+    }
+
+    public void save(Job job) {
+        mapper.save(job);
     }
 }
