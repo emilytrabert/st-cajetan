@@ -1,5 +1,7 @@
 package com.emilytrabert.stcajetan.servlet;
 
+import static com.emilytrabert.stcajetan.Constants.JOB_PATH;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,7 @@ import com.emilytrabert.stcajetan.Job;
 import com.emilytrabert.stcajetan.JobStatus;
 import com.emilytrabert.stcajetan.gateway.DynamoDBGateway;
 
-@WebServlet("/jobs")
+@WebServlet(JOB_PATH)
 public class JobsServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -50,6 +52,6 @@ public class JobsServlet extends HttpServlet {
         job.setListingUrl(params.get(LISTING_URL_ATTRIBUTE_NAME)[0]);
         job.setNotes(params.get(NOTES_ATTRIBUTE_NAME)[0]);
         gateway.save(job);
-        doGet(request, response);
+        response.sendRedirect(request.getContextPath() + JOB_PATH);
     }
 }

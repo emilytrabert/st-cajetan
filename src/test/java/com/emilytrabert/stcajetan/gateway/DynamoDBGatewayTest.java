@@ -58,7 +58,7 @@ public class DynamoDBGatewayTest {
 
         assertEquals(1, results.size());
         Job item = results.get(0);
-        assertEquals("test", item.getId());
+        assertEquals(TEST_ID, item.getId());
         assertEquals(JobStatus.INTERVIEWING, item.getJobStatus());
     }
 
@@ -69,5 +69,12 @@ public class DynamoDBGatewayTest {
         classUnderTest.save(item);
 
         verify(mapper).save(item);
+    }
+
+    @Test
+    public void testDelete() {
+        classUnderTest.delete(TEST_ID);
+
+        verify(mapper).delete(any(Job.class));
     }
 }

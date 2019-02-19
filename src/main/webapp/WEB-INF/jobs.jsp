@@ -14,6 +14,7 @@
             <th>Job Status</th>
             <th>Listing URL</th>
             <th>Notes</th>
+            <th>Delete</th>
         </tr>
         <c:forEach items="${jobs}" var="job">
             <tr>
@@ -21,6 +22,7 @@
                 <td>${job.jobStatus}</td>
                 <td><a href="${job.listingUrl}">Listing</a></td>
                 <td>${job.notes}</td>
+                <td><form action="/jobs/delete" method="post"><input style="display:none" type="text" name="jobId" value="${job.id}"><input type="submit" value="Delete"></form></td>
             </tr>
         </c:forEach>
     </table>
