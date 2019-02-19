@@ -3,6 +3,7 @@ package com.emilytrabert.stcajetan.servlet;
 import static com.emilytrabert.stcajetan.Constants.JOB_PATH;
 import static com.emilytrabert.stcajetan.servlet.JobsServlet.JOBS_ATTRIBUTE_NAME;
 import static com.emilytrabert.stcajetan.servlet.JobsServlet.JOBS_JSP_PATH;
+import static com.emilytrabert.stcajetan.servlet.JobsServlet.JOB_STATUSES_ATTRIBUTE_NAME;
 import static com.emilytrabert.stcajetan.servlet.JobsServlet.LISTING_URL_ATTRIBUTE_NAME;
 import static com.emilytrabert.stcajetan.servlet.JobsServlet.NOTES_ATTRIBUTE_NAME;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,6 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.emilytrabert.stcajetan.Job;
+import com.emilytrabert.stcajetan.JobStatus;
 import com.emilytrabert.stcajetan.gateway.DynamoDBGateway;
 
 public class JobsServletTest {
@@ -55,6 +57,7 @@ public class JobsServletTest {
         classUnderTest.doGet(request, response);
 
         verify(request).setAttribute(JOBS_ATTRIBUTE_NAME, results);
+        verify(request).setAttribute(JOB_STATUSES_ATTRIBUTE_NAME, JobStatus.values());
         verify(dispatcher).forward(request, response);
     }
 

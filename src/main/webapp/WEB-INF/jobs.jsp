@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>Jobs</title>
@@ -14,15 +14,33 @@
             <th>Job Status</th>
             <th>Listing URL</th>
             <th>Notes</th>
+            <th>Save</th>
             <th>Delete</th>
         </tr>
         <c:forEach items="${jobs}" var="job">
             <tr>
                 <td>${job.id}</td>
-                <td>${job.jobStatus}</td>
+                <td>
+                    <select form="save-${job.id}" name="jobStatus">
+                        <c:forEach var="jobStatus" items="${jobStatuses}">
+                            <option value="${jobStatus}" ${jobStatus == job.jobStatus ? 'selected="selected"' : ''}>${jobStatus}</option>
+                        </c:forEach>
+                    </select>
+                </td>
                 <td><a href="${job.listingUrl}">Listing</a></td>
-                <td>${job.notes}</td>
-                <td><form action="/jobs/delete" method="post"><input style="display:none" type="text" name="jobId" value="${job.id}"><input type="submit" value="Delete"></form></td>
+                <td><textarea form="save-${job.id}" name="notes">${job.notes}</textarea></td>
+                <td>
+                    <form id="save-${job.id}" action="/jobs/update" method="post">
+                        <input style="display:none" type="text" name="jobId" value="${job.id}">
+                        <input style="display:none" type="text" name="listingUrl" value="${job.listingUrl}">
+                        <input type="submit" value="Save">
+                    </form>
+                <td>
+                    <form action="/jobs/delete" method="post">
+                        <input style="display:none" type="text" name="jobId" value="${job.id}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>
