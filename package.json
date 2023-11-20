@@ -1,0 +1,17 @@
+{
+  "name": "st-cajetan",
+  "version": "1.0.0",
+  "description": "Patron saint of job seekers and the unemployed.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.9.2",
+    "typescript": "^5.3.2"
+  }
+}
